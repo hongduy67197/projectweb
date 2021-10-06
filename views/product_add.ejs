@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <%- include("./components/head") %>
+</head>
+<body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
+    <script>
+        NProgress.configure({ showSpinner: false });
+        NProgress.start();
+    </script>
+
+    <div class="mobile-sticky-body-overlay"></div>
+
+    <div class="wrapper">
+
+        <!--
+          ====================================
+          ——— LEFT SIDEBAR WITH FOOTER
+          =====================================
+        -->
+         <%- include("./components/aside") %>
+
+
+
+    <div class="page-wrapper">
+        <!-- Header -->
+        <%- include("./components/header") %>
+
+        <!---Content ---->
+
+        <div class="content-wrapper">
+            <%- include("./components/content_product_add") %>
+
+
+            <footer class="footer mt-auto">
+                <%- include("./components/footer") %>
+
+            </footer>
+
+        </div>
+    </div>
+
+
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCn8TFXGg17HAUcNpkwtxxyT9Io9B_NcM" defer></script>
+    <script src="/views/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="/views/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/views/assets/plugins/toaster/toastr.min.js"></script>
+    <script src="/views/assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
+    <script src="/views/assets/plugins/charts/Chart.min.js"></script>
+    <script src="/views/assets/plugins/ladda/spin.min.js"></script>
+    <script src="/views/assets/plugins/ladda/ladda.min.js"></script>
+    <script src="/views/assets/plugins/jquery-mask-input/jquery.mask.min.js"></script>
+    <script src="/views/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="/views/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="/views/assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
+    <script src="/views/assets/plugins/daterangepicker/moment.min.js"></script>
+    <script src="/views/assets/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/views/assets/plugins/jekyll-search.min.js"></script>
+    <script src="/views/assets/js/sleek.js"></script>
+    <script src="/views/assets/js/chart.js"></script>
+    <script src="/views/assets/js/date-range.js"></script>
+    <script src="/views/assets/js/map.js"></script>
+    <script src="/views/assets/js/custom.js"></script> -->
+
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./components/head") %>    
+    <link rel="stylesheet" href="/views/assets/css/cart.css">
+    <title>Cart</title>
+</head>
+<body>
+  <%- include("./components/headercliend") %>
+    <main>
+        <div class="basket">
+          <h1 class="macart"><%=cart[0]._id%></h1>
+          <div class="basket-labels">
+            <ul>
+              <li class="item item-heading">Item</li>
+              <li class="price">Price</li>
+              <li class="quantity">Quantity</li>
+              <li class="subtotal">Subtotal</li>
+            </ul>
+          </div>
+          <%for(const listdatta of cart[0].listProducts) {%>
+          <div class="basket-product">
+            <div class="item">
+              <div class="product-image">
+                <img src="<%= listdatta.idproduct.ListImg%>" alt="Placholder Image 2" class="product-frame">
+              </div>
+              <div class="product-details">
+                <h1><strong><span class="item-quantity"></span><%= listdatta.quantity%> x</strong> <%= listdatta.idproduct.productName%></h1>
+                <p><strong><%= listdatta.idproduct.color%>, Size <%= listdatta.idproduct.size%></strong></p>
+                <p class="idProduct"><%= listdatta.idproduct._id%></p>
+              </div>
+            </div>
+            <div class="price"><%= listdatta.idproduct.price%></div>
+            <div class="quantity">
+              <input type="number" value="<%= listdatta.quantity%>" min="1" class="quantity-field">
+            </div>
+            <div class="subtotal">104.00</div>
+            <div class="remove">
+              <button>Remove</button>
+            </div>
+          </div>
+          <% } %>
+        </div>
+        <aside>
+          <div class="summary">
+            <div class="summary-total-items"><span class="total-items"></span> Items in your Bag</div>
+            <div class="summary-subtotal">
+              <div class="subtotal-title">Subtotal</div>
+              <div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
+              <div class="summary-promo hide">
+                <div class="promo-title">Promotion</div>
+                <div class="promo-value final-value" id="basket-promo"></div>
+              </div>
+            </div>
+            <div class="summary-delivery">
+              <select name="delivery-collection" class="summary-delivery-selection">
+                  <option value="0" selected="selected">Select Collection or Delivery</option>
+                 <option value="collection">Collection</option>
+                 <option value="first-class">Royal Mail 1st Class</option>
+                 <option value="second-class">Royal Mail 2nd Class</option>
+                 <option value="signed-for">Royal Mail Special Delivery</option>
+              </select>
+            </div>
+            <div class="summary-total">
+              <div class="total-title">Total</div>
+              <div class="total-value final-value" id="basket-total">130.00</div>
+            </div>
+            <div class="summary-checkout">
+              <button class="checkout-cta">Go to Secure Checkout</button>
+            </div>
+          </div>
+        </aside>
+      </main>
+</body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> -->
+<script src="/views/assets/js/cart.js"></script>
+<script src="/views/assets/js/home.js"></script>
+<script src="/views/assets/js/Catagories.js"></script>
+</html>

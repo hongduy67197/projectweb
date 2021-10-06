@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include("./components/head") %>
+    <title>Product details</title>
+    <link rel="stylesheet" href="/views/assets/css/product_details.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+</head>
+<body>
+  <%- include("./components/headercliend") %>
+    <main class="container">
+
+        <!-- Left Column / Headphones Image -->
+        <div class="left-column">
+          <img data-image="black" src="/views/assets/img/black.png" alt="">
+          <img data-image="blue" src="/views/assets/img/blue.png" alt="">
+          <img data-image="red" class="active" src="/views/assets/img/red.png" alt="">
+        </div>
+  
+  
+        <!-- Right Column -->
+        <div class="right-column">
+  
+          <!-- Product Description -->
+          <div class="product-description">
+            <span id="codesanpham"><%=listinfor[0].productCode %></span>
+            <h1 id="tensanpham"><%=listinfor[0].productName %></h1>
+            <p><%=listinfor[0].description %></p>
+          </div>
+  
+          <!-- Product Configuration -->
+          <div class="product-configuration">
+  
+            <!-- Product Color -->
+            <div class="product-color">
+              <span>Color</span>
+  
+              <div class="color-choose">
+                <select  id="colorselect">
+                  <%for(const listfor of listinfor){%>
+                      <option value="<%=listfor.color%>"><%=listfor.color%></option>
+                  <%}%>
+              </select>
+         
+                <% for(const listfor of listinfor) { %> 
+                  <div>
+                    <input class="mausanpham" data-image="<%= listfor.color %>" type="radio" id="<%= listfor.color %>" name="color" value="<%= listfor.color %>" checked>
+                    <label for="<%= listfor.color %>"><span></span></label>
+                  </div>
+                <% } %>
+              </div>
+
+            </div>
+  
+            <!-- Cable Configuration -->
+            <div class="cable-config">
+              <span>Size</span>
+              <select  id="sizeselect">
+                <%for(const listfor of listinfor){%>
+                    <option value="<%=listfor.size%>"><%=listfor.size%></option>
+                <%}%>
+            </select>
+              <!-- <div class="cable-choose">
+                <% for(const listfor of listinfor) { %> 
+                  <button class="sizesanpham"><%= listfor.size %></button>
+                <% } %>
+              </div> -->
+              <div class="Product_number">
+                <span>Số lượng</span>
+                <div>
+                    <input class="soluongsanpham" type="number" min="1" placeholder="  Nhập số lượng" style="margin-bottom: 20px;width: 140px;;height: 45px;border-radius: 9px;padding: 10px;border: 1px solid #E1E8EE;color: #5E6977;outline: none;">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Product Pricing -->
+          <div class="productprice">
+            <span class="giasanpham"><%=listinfor[0].price %></span>
+            <a href="#" class="cart-btn">Add to cart</a>
+          </div>
+        </div>
+
+      </main>  
+</body>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script> -->
+<script>
+    $(document).ready(function() {
+$('.color-choose input').on('click', function() {
+    var headphonesColor = $(this).attr('data-image');
+    $('.active').removeClass('active');
+    $('.left-column img[data-image = ' + headphonesColor + ']').addClass('active');
+    $(this).addClass('active');
+});
+});
+</script>
+<script src="/views/assets/js/home.js"></script>
+<script src="/views/assets/js/Catagories.js"></script>
+<script src="/views/assets/js/filter.js"></script>
+<script src="/views/assets/js/product_details.js"></script>
+</html>
