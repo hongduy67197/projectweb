@@ -38,6 +38,6 @@ app.get("*", (req, res) => {
 // test api find all
 
 // listen port 3000
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
