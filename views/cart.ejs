@@ -25,7 +25,7 @@
                 <img src="<%= listdatta.idproduct.ListImg%>" alt="Placholder Image 2" class="product-frame">
               </div>
               <div class="product-details">
-                <h1><strong><span class="item-quantity"></span><%= listdatta.quantity%> x</strong> <%= listdatta.idproduct.productName%></h1>
+                <h1><strong><span class="item-quantity"></span>p<%= listdatta.quantity%> x</strong> <%= listdatta.idproduct.productName%></h1>
                 <p><strong><%= listdatta.idproduct.color%>, Size <%= listdatta.idproduct.size%></strong></p>
                 <p class="idProduct"><%= listdatta.idproduct._id%></p>
               </div>
@@ -34,9 +34,12 @@
             <div class="quantity">
               <input type="number" value="<%= listdatta.quantity%>" min="1" class="quantity-field">
             </div>
-            <div class="subtotal">104.00</div>
+            <div class="subtotal"></div>
             <div class="remove">
               <button>Remove</button>
+            </div>
+            <div class="confirm" idproduct="<%= listdatta.idproduct._id%>">
+              <button>confirm</button>
             </div>
           </div>
           <% } %>
@@ -67,6 +70,7 @@
             </div>
             <div class="summary-checkout">
               <button class="checkout-cta">Go to Secure Checkout</button>
+              <button class="add-order">ADD ORDER</button>
             </div>
           </div>
         </aside>

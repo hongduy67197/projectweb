@@ -19,12 +19,12 @@
                                 <tr>
                                     <th>idCatagories</th>
                                     <th>Product Name</th>
-                                    <th class="d-none d-md-table-cell">Units</th>
-                                    <th class="d-none d-md-table-cell">Order Date</th>
-                                    <th class="d-none d-md-table-cell">Order Cost</th>
-                                    <th>Status</th>
-                            
-                                    <th></th>
+                                    <th class="d-none d-md-table-cell">Img</th>
+                                    <th class="d-none d-md-table-cell">Price</th>
+                                    <th class="d-none d-md-table-cell">Quality</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
+                                    <th>Option</th>
                                 </tr>
                             </thead>
 
@@ -32,14 +32,17 @@
                                 <% data.map(function(ele){ %>
                                 <tr>
                                   
-                                     <td><a class="text-dark"><%= ele.idCatagories %></a></td> 
+                                     <td><a class="text-dark"><%= ele.idCatagories[0].catagoriesName %></a></td> 
                                     <td>
                                         <a class="text-dark"><%= ele.productName %></a>
                                     </td>
-                                    <td class="d-none d-md-table-cell"><%= ele.productName %></td>
-                                    <td class="d-none d-md-table-cell"><%= ele.productCode %></td>
-                                    <td class="d-none d-md-table-cell"><%= ele.idCatagories %></td>
-                                                                       
+                                    <td class="d-none d-md-table-cell"><%= ele.ListImg %></td>
+                                    <td class="d-none d-md-table-cell"><%= ele.price %></td>
+                                    <td class="d-none d-md-table-cell"><%= ele.quality %></td>
+                                    <td class="d-none d-md-table-cell"><%= ele.size %></td>
+                                    <td class="d-none d-md-table-cell"><%= ele.color %></td>
+                                    <td class="d-none d-md-table-cell"><button class="edit-product" idproduct="<%= ele._id %>" idCatagories="<%= ele.idCatagories[0]._id %>" productName="<%= ele.productName %>"
+                                    productCode="<%= ele.productCode %>"  price="<%= ele.price %>"  quality="<%= ele.quality %>" color="<%= ele.color %>" size="<%= ele.size %>">Edit</button></td>                                 
                                 </tr>
                                 <% }) %> 
                             </tbody>
@@ -48,5 +51,58 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+<div class="popup">
+    <div class="popup-content">
+        <img src="../public/img/cancel.png" alt="close" class="close-editproduct">
+        <table>
+            <tr>
+                <td>idCatagories</td>
+                <td>
+                <input type="text" class="input-edit" id="idCatagories-edit" placeholder="idCatagories">
+                </td>
+            </tr>
+            <tr>
+                <td>productName</td>
+                <td>
+                <input type="text" class="input-edit" id="productName-edit" placeholder="productName">
+                </td>
+            </tr>
+            <tr>
+                <td>productCode</td>
+                <td>
+                    <input type="text" class="input-edit" id="productCode-edit" placeholder="productCode">
+                </td>
+            </tr>
+            <tr>
+                <td>price</td>
+                <td>
+                    <input type="text" class="input-edit" id="price-edit" placeholder="price">
+                </td>
+            </tr>
+            <tr>
+                <td>quality</td>
+                <td>
+                    <input type="text" class="input-edit" id="quality-edit" placeholder="quality">
+                </td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>
+                    <input type="text" class="input-edit" id="color-edit" placeholder="color">
+                </td>
+            </tr>
+            <tr>
+                <td>size</td>
+                <td>
+                    <input type="text" class="input-edit" id="size-edit" placeholder="size">
+                </td>
+            </tr>
+        </table>
+        <p style="display: flex;">
+            <button class="submit">Submit</button>
+            <button class="delete">Delete</button>
+        </p>
     </div>
 </div>

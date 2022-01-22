@@ -43,6 +43,28 @@ $(".remove button").click(function () {
     });
 });
 
+$(".confirm button").click(async function (){
+  try {
+    let id = $(this).parent().attr('idproduct');
+    let idcaard = $(".macart").html();
+    let numquantity = $('.quantity-field').val();
+    // console.log(4848, id);
+    // console.log(4849, idcaard);
+    // console.log(4849, numquantity);
+    await $.ajax({
+      url:`/user/cartupdate?cartId=${idcaard}`, 
+      type: "PUT", 
+      data:{
+        idproductes: id, 
+        quantity: numquantity,
+      }
+    });
+    window.location.reload();
+  } catch (error) {
+      console.log(error);    
+  }
+});
+
 $(document).ready(function () {
   updateSumItems();
 });
@@ -117,7 +139,7 @@ function recalculateCart(onlyTotal) {
 /* Update quantity */
 function updateQuantity(quantityInput) {
   /* Calculate line price */
-  console.log(89, quantityInput.value);
+  // console.log(89, quantityInput.value);
   var productRow = $(quantityInput).parent().parent();
   var price = parseFloat(productRow.children(".price").text());
   var quantity = $(quantityInput).val();

@@ -14,6 +14,7 @@ router.put("/cart/fix", userController.updatecarqua);
 router.put("/cart/del", userController.deletacard);
 router.get("/productid", userController.getidproduct);
 router.get("/:userid", userController.getidcard);
-router.post("/ordernew", userController.createorder);
+router.get("/orderuser/:iduser", userController.getListOrderUser);
+router.post("/order", userController.createorder);
 router.put("/cartupdate", userController.updatecart);
 module.exports = router;

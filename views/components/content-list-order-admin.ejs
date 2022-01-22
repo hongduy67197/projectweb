@@ -1,0 +1,157 @@
+
+      <div id="list-order-admin">
+        <div class="container">
+            <div class="d-flex justify-content-between" style="color: rgba(229, 226, 226, 0.89);">
+                <h5>Project title: </h5>
+                <div>
+
+                    <button type="button" class="btn-top btn btn-primary mx-2">
+                        Total Order: 
+                        
+                    </button>
+
+                    <button class=" btn-top btn btn-primary  mx-2" data-bs-toggle="modal" data-bs-target="#total-users">
+                        Total users: 
+                    </button>
+
+                   <!-- Modal -->
+                   <div class="modal fade" id="total-users" style="color: black;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h5 class="modal-title" id="exampleModalLabel">Total users</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body ">
+                              <p id="AdminName"> </p>
+                              <p>Users:</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   
+
+                </div>
+            </div>
+            <div class="scroll-content" >
+            <div class="d-flex justify-content-between align-items-start ">
+                <%for (i=0; i < listStatus.length; i++) { %>
+                    <div class="col-design  p-2 ">
+                        <div class="content-title d-flex justify-content-center">
+                            <h5 class="" style="color: white;">
+                                <%=listStatus[i].title%>
+                            </h5>
+                        </div>
+
+                        <div class="todo-body mt-1" style=" overflow-y: auto;height: 50vh;">
+                            <%for (const element of listAllOrder) { if(element.status==listStatus[i].value){%>
+                                <div class="todo-content ">
+                                    <button class="content-btn btn" data-bs-toggle="modal" data-bs-target="<%=element.status%>">
+                                        <span><%=element._id%></span>
+                                        <span><%=element.iduser[0].username%></span>
+                                        <input type="hidden" value="">
+                                        <input type="hidden" value="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="svg-pencil bi bi-pencil" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                        </svg>
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade " tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+
+                                                    <h5 class="modal-title" id="exampleModalLabel">Update task</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body ">
+                                                    Title: <br>
+                                                    <textarea  class="update-title-input mb-2" cols="30" rows="3"></textarea> <br>
+
+                                                    <input class="update-id-input" type="hidden"> Priority: <br>
+                                                    <select class="update-priority mb-2" name="priority" id="">    
+                                                    </select> <br>
+                                                    User doing this task:  <br>
+                                                            <input class=" update-username" type="text" value="" disabled> 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" value="">
+                                                    <button class="delete-btn btn btn-danger">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                                          </svg>
+                                                    </button>
+
+                                                    <button type="button" class="update-btn btn btn-primary">Update</button>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                          Move
+                                                        </button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                          <li><a type="button" class="move-btn-waiting dropdown-item"> To Waiting</a></li>
+                                                          <li><a type="button" class="move-btn-doing dropdown-item" >To Doing</a></li>
+                                                          <li><a type="button" class="move-btn-done dropdown-item">To Done</a></li>
+                                                        </ul>
+                                                      </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }} %>
+                                    <button class="modal-btn btn" data-bs-toggle="modal" data-bs-target="#create-todo-task"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                                        </svg>
+                                        Add another task
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="create-todo-task" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">New task</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <textarea class="input-content m-2" placeholder="Enter title for this task..."  cols="30" rows="3"></textarea><br>
+                                                    <select class="input-priority m-2" name="username">
+                                                       <option value=""selected disabled>user who does this task...</option>
+                                                        <p></p>
+                                                       <option value=""></option>
+                                                   </select> 
+                                                    <select class="input-priority m-2" name="priority" id="">
+                                                       <option value=""selected disabled>priority...</option>
+                                                       <option value="0">High</option>
+                                                       <option value="1">Medium</option>
+                                                       <option value="2">Low</option>
+                                                   </select> 
+                                                   <input type="hidden" name="projectId" value="">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type="hidden" value="">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="create-task-btn btn btn-primary">Create task</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                        </div>
+                    </div>
+                <%  }   %>
+            </div>
+        </div>
+        </div>
+
+    </div>

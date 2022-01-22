@@ -7,20 +7,12 @@
                         </div>
 
                         <div class="card-body">
-                                <div class="form-group d-inline-block mb-5 mr-2">Chọn
-                                    idCatagories
+                                <div class="form-group d-inline-block mb-5 mr-2">Select Catagories
                                     <select class="form-control"  name="idCatagories">
-                                        <option>----Select idCatagories----</option>
-                                        <option name="idCatagories" value="idCatagories" >Điện thoại & máy tính bảng</option>
-                                        <option>Điện tử - Điện lạnh </option>
-                                        <option>Phụ kiện - Thiết bị số </option>
-                                        <option>Laptop - Thiết bị IT </option>
-                                        <option>Điện gia dụng </option>
-                                        <option>Nhà cửa đời sống </option>
-                                        <option>Hàng tiêu dùng - thực phẩm </option>
-                                        <option>Đồ chơi - Mẹ & bé </option>
-                                        <option>Làm đẹp - Sức khỏe </option>
-                                        <option>Thời trang - phụ kiện </option>
+                                        <option>----Select Catagories----</option>
+                                        <% listCata.map((ele)=>{  %>
+                                            <option value = '<%= ele._id %>'> <%= ele.catagoriesName %></option>
+                                        <% }) %>
                                     </select>
                                 </div>
 
@@ -62,14 +54,14 @@
                                 <div class="row">
                                     <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="fname"> Tên sản phẩm </label>
+                                            <label for="fname"> productName </label>
                                             <input type="text" class="form-control" placeholder="iphone 11"
                                                 name="productName">
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
                                         <div class="form-group">
-                                            <label for="lname">Mã sản phẩm</label>
+                                            <label for="lname">productCode</label>
                                             <input type="text" class="form-control" placeholder="ip11"
                                                 name="productCode">
                                         </div>
@@ -79,7 +71,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="State">Giá bán</label>
+                                                    <label for="State">price</label>
                                                     <input type="text" class="form-control" placeholder="100000"
                                                         name="price">
                                                 </div>
@@ -87,7 +79,7 @@
 
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="Zip">Số lượng </label>
+                                                    <label for="Zip">quality </label>
                                                     <input type="text" class="form-control" placeholder="1,2,3..."
                                                         name="quality">
                                                 </div>
@@ -98,7 +90,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="State">Màu sắc </label>
+                                                    <label for="State">color </label>
                                                     <input type="text" class="form-control" placeholder="Đen, đỏ, ghi..."
                                                         name="color">
                                                 </div>
@@ -107,7 +99,7 @@
 
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="Zip">Kích cỡ</label>
+                                                    <label for="Zip">size</label>
                                                     <input type="text" class="form-control" placeholder="s,m,l..."
                                                         name="size">
                                                 </div>
@@ -118,9 +110,9 @@
                                         <div class="row">
                                             <div class="col-10">
                                                 <div class="form-group">
-                                                    <label for="Zip">Đã bán</label>
-                                                    <input type="text" class="form-control" placeholder="1,2,3..."
-                                                        name="sold">
+                                                    <label for="Zip">Img</label>
+                                                    <input type="text" class="form-control" 
+                                                        name="Img">
                                                 </div>
                                             </div>
 

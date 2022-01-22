@@ -11,6 +11,9 @@ exports.getList = async function (req, res) {
     });
     const listCatagory = await catagoriesModel.find();
     let cartId = req.query.cartId;
+    // let orderlist = await ordersModel
+    //   .find({ _id: orderId })
+    //   .populate("listProducts.idproduct");
     // let userid = await usersModel.find();
     // let listproduct = await productModel.find({});
     let cart = await cartstModel
@@ -19,13 +22,14 @@ exports.getList = async function (req, res) {
     // console.log(cart.listProducts);
     let listData = {
       product: product,
+      // orderlist: orderlist,
       cart: cart,
       listCatagory,
       // listproduct: listproduct,
       // iduser: userid,
     };
     // res.json(listData);
-    console.log(25, cart);
+    console.log(25, cart[0]);
     res.render("cart.ejs", listData);
   } catch (error) {
     console.log(error);
@@ -43,30 +47,59 @@ exports.createCatagories = async function (req, res) {
       let newCatagories = await catagoriesModel.create({
         catagoriesName: catagoriesName,
       });
-      res.json("ta thanh cong ", newCatagories);
+      res.json("tao moi thanh cong ", newCatagories);
     }
   } catch (error) {
     res.json(error);
   }
 };
 
-exports.createorder = async function (req, req) {
+exports.getListOrderUser = async function(req, res){
   try {
-    let data = req.body;
+    let listOrder = await ordersModel
+    .find({iduser: req.params.iduser})
+    .populate("listProducts.idproduct");
+    res.json(listOrder);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.createorder = async function (req, res) {
+  try {
+    let listsp = await cartstModel.find({iduser: req.body.iduser});
+    console.log(70, listsp[0].listProducts);
+    let a ;
+    a = listsp[0].listProducts;
+    let newDate = new Date();
+    console.log(73, a);
     let newOrder = await ordersModel.create({
-      idproduct: data.idproduct,
-      quantity: data.quantity,
-      totalIprice: data.totalIprice,
-      iduse: data.iduse,
-      address: data.address,
-      orderPrice: data.orderPrice,
-      phone: data.phone,
+      listProducts: a,
+      iduser: req.body.iduser, 
+      status: req.body.status,
+      createDate: newDate, 
+      status: "waiting",
     });
-    res.json("tao order thanh cong", newOrder);
+    let olderQuality = listsp[0].listProducts;
+    for(let elm of olderQuality){
+      let CartQuality = elm.quantity;
+      console.log(83, -CartQuality, elm.idproduct);
+      await productModel.updateOne({
+        _id: elm.idproduct,
+      },{
+        $inc:{quality: -CartQuality} 
+      });
+    }
+    console.log(123, olderQuality);
+    let clearCartUser = await cartstModel.updateOne({
+      iduser: req.body.iduser
+    }, {listProducts: []});
+    res.json(newOrder)
   } catch (error) {
     console.log(error);
   }
 };
+
 
 exports.updatecart = async function (req, res) {
   try {
@@ -76,7 +109,7 @@ exports.updatecart = async function (req, res) {
       _id: req.query.cartId,
     });
 
-    console.log(80, searchproduct.listProducts);
+    console.log(80, req.body);
     let oldquantity;
     for (let i = 0; i < searchproduct.listProducts.length; i++) {
       if (idproductes === searchproduct.listProducts[i].idproduct) {
@@ -84,15 +117,19 @@ exports.updatecart = async function (req, res) {
       }
     }
     if (oldquantity) {
-      let newQuantity = oldquantity * 1 + quantity * 1;
+      // console.log(91, "if");
+      // let newQuantity = oldquantity * 1 + quantity * 1;
+      let newQuantity =  quantity ;
       console.log(87, newQuantity);
       let updatecartquantity = await cartstModel.updateOne(
         { _id: req.query.cartId, "listProducts.idproduct": idproductes },
         { $set: { "listProducts.$.quantity": newQuantity } }
-        // $. trong "listProducts.$.quantity" su dung de tru van den "listProducts.idproduct"
+        // $. trong "listProducts.$.quantity" su dung de truy van den "listProducts.idproduct"
       );
       res.json(updatecartquantity);
     } else {
+      console.log(101, "else");
+
       let fixcartes = await cartstModel.updateOne(
         { _id: req.query.cartId },
         {

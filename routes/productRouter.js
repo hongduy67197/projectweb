@@ -25,22 +25,41 @@ const upload = multer({ storage: storage });
 // const jwt = require("jwt")
 // const axios = require('axios');
 
-router.get("/add", (req, res) => {
-  res.render("../views/product_add");
+router.get("/add", async(req, res) => {
+  try {
+    const listCata = await catagoriesModel.find()
+    res.render("../views/product_add", {listCata});
+  } catch (error) {
+    res.json(error)
+  }
 });
 
 router.get("/product", (req, res) => {
   productModel
     .find()
+    .populate('idCatagories')
     .then((data) => {
       res.render("../views/product", { data });
 
-      console.log(data);
+      console.log(data[0]);
     })
     .catch((err) => {
       res.send(err);
     });
 });
+// router.get("/product", async (req, res) => {
+//   try {
+//     let listcata = await catagoriesModel.find();
+//     let listProduct = await productModel.find();
+//     let listDataProduct = {
+//       listcata: listcata,
+//       listProduct: listProduct,
+//     }
+//         res.render("../views/product", { listDataProduct });
+//   } catch (error) {
+//     console.log(error);    
+//   }
+// });
 
 router.post("/add", upload.single("noidung"), async function (req, res, next) {
   console.log(req.file);
@@ -62,6 +81,8 @@ router.post("/add", upload.single("noidung"), async function (req, res, next) {
       size: req.body.size,
       createDate: req.body.createDate,
     });
+    
+    console.log(79, listCata)
     themproduct.save();
     res.render("../views/product_add");
   } catch (error) {
@@ -158,8 +179,9 @@ router.get("/detail", (req, res) => {
 router.get("/search", async (req, res) => {
   try {
     const searchList = await productModel.find({
-      productName: { $regex: `.*${req.body.search}.*` },
+      productName: { $regex: `.*${req.query.search}.*` },
     });
+    console.log(164, searchList);
     res.json(searchList);
   } catch (error) {
     res.json(error);
@@ -170,7 +192,11 @@ router.get("/filter", async (req, res) => {
   try {
     let listProduct;
     const listCatagory = await catagoriesModel.find();
-    if (req.query.max && req.query.min) {
+    if (req.query.name) {
+      listProduct = await productModel.find({
+        productName: { $regex: `.*${req.query.name}.*` },
+      });
+    } else if (req.query.max && req.query.min) {
       listProduct = await productModel.find({
         idCatagories: req.query.catagory,
         price: { $lte: req.query.max, $gte: req.query.min },
@@ -197,7 +223,7 @@ router.get("/filter", async (req, res) => {
       }
     });
 
-    // console.log("159", filterledProductList);
+    console.log("159", filterledProductList);
     res.render("../views/filter", {
       productList: filterledProductList,
       listCatagory,
@@ -222,6 +248,52 @@ router.get("/product_details", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.json(error);
+  }
+});
+
+router.post("/product_details_color", async (req, res) => {
+  try {
+    console.log(256);
+    let listCatagory = await catagoriesModel.find();
+    let listSearchColor = await productModel.find({
+      productCode: req.query.namesp,
+      color: req.body.color,
+    })
+    console.log(listSearchColor);
+    res.render('product_color', {listCatagory, listSearchColor});
+    // res.json(listSearchColor)
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.put("/fix_product", async (req,res) =>{
+  try {
+    let updateProduct = await productModel.updateOne(
+      { _id: req.params.idProduct}, 
+      { 
+        idCatagories: req.body.idCatagories, 
+        productName: req.body.productName, 
+        productCode: req.body.productCode, 
+        price: req.body.price, 
+        quality: req.body.quality, 
+        color: req.body.color, 
+        size: req.body.size
+      });
+    res.json(updateProduct);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/delete_product", async (req,res) =>{
+  try {
+    let deleteProduct = await productModel.deleteOne({
+      _id: req.params.idProduct
+    })
+    res.json('Delete Success');
+  } catch (error) {
+    console.log(error);
   }
 });
 module.exports = router;

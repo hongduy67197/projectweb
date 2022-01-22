@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("./dbConnect.js");
 const productModel = require("./productModel");
 const cartsSchema = mongoose.Schema(
   {
@@ -14,3 +14,4 @@ const cartsSchema = mongoose.Schema(
 let cartstModel = mongoose.model("carts", cartsSchema);
 
 module.exports = cartstModel;
+

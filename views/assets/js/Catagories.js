@@ -14,5 +14,19 @@ $(document).ready(function () {
     //   });
   });
 });
+
+$("#searchbtn").click(async function () {
+  try {
+    let textinput = $("#searchinput").val();
+    console.log(textinput);
+    await $.ajax({
+      url: `/product/filter?name=${textinput}`,
+      type: "GET",
+    });
+    window.location.href = `/product/filter?name=${textinput}`;
+  } catch (error) {
+    console.log(error);
+  }
+});
 // let catoriId = localstorage.getItem("id");
 // console.log(catoriId);

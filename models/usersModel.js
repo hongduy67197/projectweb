@@ -1,12 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("./dbConnect.js");
 const path = require("path");
 
-mongoose.connect("mongodb://localhost/k12nodemy_project", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
-});
 
 // const usersSchema = mongoose.Schema({
 //   username: String,

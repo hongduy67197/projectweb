@@ -12,9 +12,11 @@
 
         <!-- Left Column / Headphones Image -->
         <div class="left-column">
+          <!-- <% for(const listfor of listinfor) { %>  -->
           <img data-image="black" src="/views/assets/img/black.png" alt="">
           <img data-image="blue" src="/views/assets/img/blue.png" alt="">
           <img data-image="red" class="active" src="/views/assets/img/red.png" alt="">
+          <!-- <%}%> -->
         </div>
   
   
@@ -35,40 +37,37 @@
             <div class="product-color">
               <span>Color</span>
   
-              <div class="color-choose">
-                <select  id="colorselect">
+              <form class="color-choose">
+                <!-- <select  id="colorselect">
                   <%for(const listfor of listinfor){%>
                       <option value="<%=listfor.color%>"><%=listfor.color%></option>
                   <%}%>
-              </select>
+              </select> -->
          
                 <% for(const listfor of listinfor) { %> 
-                  <div>
-                    <input class="mausanpham" data-image="<%= listfor.color %>" type="radio" id="<%= listfor.color %>" name="color" value="<%= listfor.color %>" checked>
-                    <label for="<%= listfor.color %>"><span></span></label>
+                  <div class="pickcolor">
+                    <input class="mausanpham" data-image="<%= listfor.color %>" type="radio" id="<%= listfor.color %>" name="color" value="<%= listfor.color %>">
+                    <label for="<%= listfor.color %>"><span id="colorsp"><%= listfor.color %></span></label>
                   </div>
                 <% } %>
-              </div>
+              </form>
 
             </div>
   
             <!-- Cable Configuration -->
             <div class="cable-config">
               <span>Size</span>
-              <select  id="sizeselect">
-                <%for(const listfor of listinfor){%>
-                    <option value="<%=listfor.size%>"><%=listfor.size%></option>
-                <%}%>
-            </select>
+              <div class="size-color-quality"></div>
+              
               <!-- <div class="cable-choose">
                 <% for(const listfor of listinfor) { %> 
                   <button class="sizesanpham"><%= listfor.size %></button>
                 <% } %>
               </div> -->
               <div class="Product_number">
-                <span>Số lượng</span>
+                <span>Quality <p class="number_Quality"></p></span>
                 <div>
-                    <input class="soluongsanpham" type="number" min="1" placeholder="  Nhập số lượng" style="margin-bottom: 20px;width: 140px;;height: 45px;border-radius: 9px;padding: 10px;border: 1px solid #E1E8EE;color: #5E6977;outline: none;">
+                    <input class="soluongmua" type="number" min="1" placeholder="Nhập số lượng" style="margin-bottom: 20px;width: 140px;;height: 45px;border-radius: 9px;padding: 10px;border: 1px solid #E1E8EE;color: #5E6977;outline: none;">
                 </div>
               </div>
             </div>

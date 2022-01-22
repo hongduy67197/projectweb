@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("./dbConnect.js");
 
 const productCodeSchema = mongoose.Schema(
   {

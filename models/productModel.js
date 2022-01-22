@@ -1,7 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require("./dbConnect.js");
 const path = require("path");
 
-
+// mongoose.connect("mongodb://localhost/k12nodemy_project", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useFindAndModify: false,
+//   useCreateIndex: true,
+// });
 // const productSchema = mongoose.Schema({
 //   idCatagories: String,
 //   idSubCatagories: String,
@@ -45,6 +50,13 @@ const productSchema = mongoose.Schema(
 );
 
 const productModel = mongoose.model("product", productSchema);
+// productModel.updateOne({_id: "613b6e55971608edb978de81"},{$inc:{quality: -5}})
+// .then((data)=>{
+//   console.log(data);
+// })
+// .catch((error)=>{
+//   console.log(error);
+// })
 // productModel.create({
 //     idCatagories: 'phone',
 //     idSubCatagories: 'smartphone',

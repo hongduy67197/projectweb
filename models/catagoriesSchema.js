@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("./dbConnect.js");
 
 const CatagoriesSchema = mongoose.Schema(
   {

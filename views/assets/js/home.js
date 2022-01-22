@@ -66,6 +66,32 @@ function logout() {
       console.log(err);
     });
 }
+
+let id;
+getUser().then((data) => (id = data.id));
+
+async function checkidcart() {
+  try {
+    console.log(75, id);
+    const searchidcart = $.ajax({
+      url: `/user/` + id,
+      type: "GET",
+    });
+    return searchidcart;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+$("#carticon").click(async function () {
+  try {
+    let idcart = await checkidcart();
+    window.location.href = `/user/cart?cartId=${idcart}`;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 function delete_cookie(name) {
   document.cookie = name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 }
