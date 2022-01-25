@@ -188,6 +188,37 @@ router.get("/search", async (req, res) => {
   }
 });
 
+router.post("/createcata", async (req, res) =>{
+  try {
+    let newCatagory = await catagoriesModel.create({
+      catagoriesName: req.body.catagoriesName,
+    }); 
+    res.json(newCatagory);
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+router.put("/updatecata", async (req, res) =>{
+  try {
+    let updatecata = await catagoriesModel.updateOne({
+      _id: req.body.idcatagories
+    },{catagoriesName: req.body.catagoriesName,})
+    res.json(updatecata)
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+router.delete("/deletecata", async (req,res)=>{
+  try {
+    let deleteCata = await catagoriesModel.deleteOne({_id:req.body.idcatagories})
+    res.json(deleteCata);
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 router.get("/filter", async (req, res) => {
   try {
     let listProduct;
